@@ -3,6 +3,7 @@ package spirelike;
 import lombok.Data;
 import spirelike.cards.Card;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -12,7 +13,7 @@ public class CardCollection {
     private List<Card> cards;
 
     public CardCollection() {
-        this.cards = new List<Card>[];
+        this.cards = new ArrayList<Card>();
     }
 
     public void shuffle() {
@@ -21,9 +22,11 @@ public class CardCollection {
 
     public Card getCard() {
         // pass
+        return cards.get(0);
     }
 
     public void addCard(final Card card) {
         // pass
+        return;
     }
 }

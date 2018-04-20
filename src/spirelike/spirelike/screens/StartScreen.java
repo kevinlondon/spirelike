@@ -1,14 +1,22 @@
 package spirelike.screens;
 
 import asciiPanel.AsciiPanel;
+import spirelike.Game;
 import spirelike.screens.BattleScreen;
 
 import java.awt.event.KeyEvent;
 
-class StartScreen implements spirelike.screens.Screen {
+public class StartScreen implements spirelike.screens.Screen {
+
+    private Game game;
+
+    public StartScreen(Game game) {
+        this.game = game;
+    }
+
     @Override
     public void displayOutput(AsciiPanel terminal) {
-        terminal.write("hello", 1, 1);
+        terminal.write("test", 1, 1);
     }
 
     @Override
