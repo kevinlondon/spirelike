@@ -3,6 +3,8 @@ package spirelike;
 
 import lombok.Data;
 
+import lombok.Getter;
+import lombok.Setter;
 import spirelike.CardCollection;
 import spirelike.cards.Card;
 
@@ -15,8 +17,13 @@ public class Player {
     private final CardCollection exhaustedPile = new CardCollection();
 
     private static final int STARTING_HEALTH = 30;
+
+    @Getter
+    @Setter
     private int maxHealth = STARTING_HEALTH;
-    private int health;
+
+    @Getter
+    @Setter private int health;
 
     private static final int STARTING_MANA = 3;
     private int maxMana = STARTING_MANA;

@@ -6,7 +6,7 @@ import spirelike.screens.BattleScreen;
 
 import java.awt.event.KeyEvent;
 
-public class StartScreen implements spirelike.screens.Screen {
+public class StartScreen implements Screen {
 
     private Game game;
 
@@ -24,7 +24,7 @@ public class StartScreen implements spirelike.screens.Screen {
         if (key.getKeyCode() == KeyEvent.VK_ENTER) {
             // initialize game
             // Create screen, which should initialize itself
-            return new BattleScreen();
+            return new BattleScreen(game);
         } else {
             return this;
         }

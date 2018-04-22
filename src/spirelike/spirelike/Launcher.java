@@ -10,14 +10,14 @@ import spirelike.screens.BattleScreen;
 public class Launcher extends JFrame implements KeyListener {
 
     private AsciiPanel terminal;
-    private Screen screen;
+    private Game game;
 
     public Launcher(){
         super();
         terminal = new AsciiPanel();
         add(terminal);
         pack();
-        screen = new BattleScreen();
+        game = new Game(terminal);
         addKeyListener(this);
         repaint();
     }
@@ -25,13 +25,13 @@ public class Launcher extends JFrame implements KeyListener {
     @Override
     public void repaint(){
         terminal.clear();
-        screen.displayOutput(terminal);
+        game.displayOutput(terminal);
         super.repaint();
     }
 
     @Override
     public void keyPressed(KeyEvent e) {
-        screen = screen.respondToUserInput(e);
+        game.respondToUserInput(e);
         repaint();
     }
 
