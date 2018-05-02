@@ -27,6 +27,6 @@ public class CardCollection {
 
     public void addCard(final Card card) {
         // pass
-        return;
+        cards.add(card);
     }
 }

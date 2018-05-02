@@ -1,5 +1,8 @@
 package spirelike.cards;
 
+import lombok.ToString;
+
+@ToString
 public class Card {
     private final String name;
 
