@@ -25,8 +25,18 @@ public class CardCollection {
         return cards.get(0);
     }
 
+    public Card getCardAtIndex(final int index) {
+        return cards.get(index);
+    }
+
     public void addCard(final Card card) {
         // pass
         cards.add(card);
+    }
+
+    public Card drawCard() {
+        final Card card = getCard();
+        cards.remove(0);
+        return card;
     }
 }

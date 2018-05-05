@@ -1,8 +1,8 @@
-package spirelike;
+package spirelike.core;
 
 import asciiPanel.AsciiPanel;
 import lombok.Data;
-import lombok.Getter;
+import spirelike.Player;
 import spirelike.screens.Screen;
 import spirelike.screens.StartScreen;
 
@@ -10,20 +10,21 @@ import java.awt.event.KeyEvent;
 
 @Data
 public class Game {
-    @Getter
-    public Player player;
+    public static Player player;
+    private Dungeon dungeon;
 
     private Screen screen;
     private AsciiPanel terminal;
 
     public Game(AsciiPanel terminal) {
         this.player = new Player();
-        this.screen = new StartScreen(this);
         this.terminal = terminal;
+        this.screen = new StartScreen(terminal);
     }
 
     public void displayOutput(AsciiPanel terminal) {
-        screen.displayOutput(terminal);
+        terminal.write(player.toStatusLine(), 0, 0);
+        screen.displayOutput();
     }
 
     public void respondToUserInput(KeyEvent key) {

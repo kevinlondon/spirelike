@@ -4,8 +4,8 @@ import javax.swing.JFrame;
 import asciiPanel.AsciiPanel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import spirelike.screens.Screen;
-import spirelike.screens.BattleScreen;
+
+import spirelike.core.Game;
 
 public class Launcher extends JFrame implements KeyListener {
 

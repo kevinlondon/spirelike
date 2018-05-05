@@ -5,6 +5,7 @@ import lombok.Data;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.Singular;
 import spirelike.CardCollection;
 import spirelike.cards.Card;
 
@@ -12,9 +13,6 @@ import spirelike.cards.Card;
 public class Player {
 
     private final CardCollection deck = new CardCollection();
-    private final CardCollection hand = new CardCollection();
-    private final CardCollection discardPile = new CardCollection();
-    private final CardCollection exhaustedPile = new CardCollection();
 
     private static final int STARTING_HEALTH = 30;
 
@@ -28,6 +26,7 @@ public class Player {
     private static final int STARTING_MANA = 3;
     private int maxMana = STARTING_MANA;
     private int mana;
+    public int CARD_DRAW_COUNT = 5;
 
 
     public Player() {
@@ -39,5 +38,13 @@ public class Player {
             deck.addCard(strike);
             deck.addCard(defend);
         }
+    }
+
+    public String toStatusLine() {
+        return "Player Goes Here";
+    }
+
+    public String toBattleStats() {
+        return "Health: " + health + " / " + maxHealth + ", Mana: " + mana + " / " + maxMana;
     }
 }

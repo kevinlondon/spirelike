@@ -24,4 +24,11 @@ public class Enemy {
         this.name = name;
     }
 
+    public void reduceHealth(final int amount) {
+        this.health -= amount;
+    }
+
+    public boolean isDead() {
+        return this.health <= 0;
+    }
 }

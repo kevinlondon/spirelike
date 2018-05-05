@@ -1,21 +1,20 @@
 package spirelike.screens;
 
 import asciiPanel.AsciiPanel;
-import spirelike.Game;
-import spirelike.screens.BattleScreen;
+import spirelike.core.Game;
 
 import java.awt.event.KeyEvent;
 
 public class StartScreen implements Screen {
 
-    private Game game;
+    private AsciiPanel terminal;
 
-    public StartScreen(Game game) {
-        this.game = game;
+    public StartScreen(final AsciiPanel terminal) {
+        this.terminal = terminal;
     }
 
     @Override
-    public void displayOutput(AsciiPanel terminal) {
+    public void displayOutput() {
         terminal.write("test", 1, 1);
     }
 
@@ -24,7 +23,7 @@ public class StartScreen implements Screen {
         if (key.getKeyCode() == KeyEvent.VK_ENTER) {
             // initialize game
             // Create screen, which should initialize itself
-            return new BattleScreen(game);
+            return new BattleScreen(terminal);
         } else {
             return this;
         }

@@ -1,13 +1,12 @@
 package spirelike.screens;
 
 import asciiPanel.AsciiPanel;
-import spirelike.Game;
 
 import java.awt.event.KeyEvent;
 
 public interface Screen {
 
-    void displayOutput(AsciiPanel terminal);
+    void displayOutput();
 
     Screen respondToUserInput(KeyEvent key);
 }

@@ -1,6 +1,7 @@
 package spirelike.cards;
 
 import lombok.ToString;
+import spirelike.Enemy;
 
 @ToString
 public class Card {
@@ -15,5 +16,17 @@ public class Card {
         this.baseDamage = baseDamage;
         this.baseBlock = baseBlock;
         this.baseCost = baseCost;
+    }
+
+    public boolean needsTarget() {
+        return true;
+    }
+
+    public int getDamage() {
+        return this.baseDamage;
+    }
+
+    public void play(Enemy enemy) {
+        enemy.reduceHealth(this.getDamage());
     }
 }
