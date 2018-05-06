@@ -18,9 +18,8 @@ public class Enemy {
     @Getter
     private String name;
 
-    public Enemy(String name, int maxHealth, int health) {
-        this.maxHealth = maxHealth;
-        this.health = health;
+    public Enemy(String name, int maxHealth) {
+        this.maxHealth = this.health = maxHealth;
         this.name = name;
     }
 
@@ -30,5 +29,9 @@ public class Enemy {
 
     public boolean isDead() {
         return this.health <= 0;
+    }
+
+    public String toBattleStatus() {
+        return this.name + ": " + health + "/" + maxHealth;
     }
 }

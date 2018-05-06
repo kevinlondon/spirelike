@@ -26,7 +26,19 @@ public class Card {
         return this.baseDamage;
     }
 
+    public int getCost() {
+        return this.baseCost;
+    }
+
+    public int getBlock() {
+        return this.baseBlock;
+    }
+
     public void play(Enemy enemy) {
         enemy.reduceHealth(this.getDamage());
+    }
+
+    public String toBattleStatus() {
+        return this.name + "Mana Cost: " + this.getCost() + ", Damage: " + this.getDamage() + ", Block: " + this.getBlock();
     }
 }
