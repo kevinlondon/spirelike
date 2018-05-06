@@ -39,6 +39,6 @@ public class Card {
     }
 
     public String toBattleStatus() {
-        return this.name + "Mana Cost: " + this.getCost() + ", Damage: " + this.getDamage() + ", Block: " + this.getBlock();
+        return this.name + " - Mana Cost: " + this.getCost() + ", Damage: " + this.getDamage() + ", Block: " + this.getBlock();
     }
 }

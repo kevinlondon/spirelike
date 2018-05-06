@@ -39,4 +39,23 @@ public class CardCollection {
         cards.remove(0);
         return card;
     }
+
+    public int size() {
+        return cards.size();
+    }
+
+    public void removeCard(final Card card) {
+        this.cards.remove(card);
+    }
+
+    public void addCards(List<Card> cards) {
+        this.cards.addAll(cards);
+    }
+
+    public List<Card> popCards() {
+        List<Card> poppedCards = new ArrayList<>();
+        poppedCards.addAll(cards);
+        cards.clear();
+        return poppedCards;
+    }
 }

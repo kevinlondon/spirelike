@@ -41,10 +41,26 @@ public class Player {
     }
 
     public String toStatusLine() {
-        return "Player Goes Here";
+        return "Player Status Line";
     }
 
     public String toBattleStats() {
         return "Health: " + health + " / " + maxHealth + ", Mana: " + mana + " / " + maxMana;
+    }
+
+    public void resetMana() {
+        mana = maxMana;
+    }
+
+    public void useMana(final int usedMana) {
+        mana -= usedMana;
+    }
+
+    public void reduceHealth(int damage) {
+        this.health -= damage;
+    }
+
+    public boolean isDead() {
+        return this.health <= 0;
     }
 }

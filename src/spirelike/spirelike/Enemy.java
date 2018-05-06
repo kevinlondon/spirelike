@@ -7,20 +7,21 @@ import lombok.ToString;
 @ToString
 public class Enemy {
 
-    @Getter
-    @Setter
     private int maxHealth;
 
     @Getter
     @Setter
     private int health;
 
+    private int baseDamage;
+
     @Getter
     private String name;
 
-    public Enemy(String name, int maxHealth) {
+    public Enemy(String name, int maxHealth, int damage) {
         this.maxHealth = this.health = maxHealth;
         this.name = name;
+        this.baseDamage = damage;
     }
 
     public void reduceHealth(final int amount) {
@@ -33,5 +34,13 @@ public class Enemy {
 
     public String toBattleStatus() {
         return this.name + ": " + health + "/" + maxHealth;
+    }
+
+    public void attack(Player player) {
+        player.reduceHealth(this.getDamage());
+    }
+
+    private int getDamage() {
+        return this.baseDamage;
     }
 }

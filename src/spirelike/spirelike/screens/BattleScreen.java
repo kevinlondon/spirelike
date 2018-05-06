@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+import static java.lang.Thread.sleep;
+
 public class BattleScreen implements Screen {
 
     private ArrayList<Enemy> enemies;
@@ -20,28 +22,30 @@ public class BattleScreen implements Screen {
 
     private final CardCollection deck;
     private final CardCollection hand = new CardCollection();
-    private final CardCollection discardPile = new CardCollection();
-    private final CardCollection exhaustedPile = new CardCollection();
+    private final CardCollection discarded = new CardCollection();
+    private final CardCollection exhausted = new CardCollection();
 
+    private static int MAX_HAND_CARDS = 9;
     private static int PLAYER_Y_OFFSET = 1;
     private static int ENEMY_START_Y_POSITION = PLAYER_Y_OFFSET + 2;
-    private int MAX_Y_POSITION;
 
     private static int CURSOR_X_OFFSET = 1;
     private static int TEXT_X_OFFSET = CURSOR_X_OFFSET + 3;
+    private static int CARD_START_Y_POSITION = 13;  // max height of 23 at the moment, max cards of 9.
 
-    private int cursorPosition = 0;
+    private static int HELP_OFFSET = CARD_START_Y_POSITION + MAX_HAND_CARDS + 1;
+
+    private int cursorPosition = PLAYER_Y_OFFSET;  // default to selecting where the player is
 
     public BattleScreen(final AsciiPanel terminal) {
         enemies = new ArrayList<>();
-        Enemy enemy = new Enemy("Monster", 42);
+        Enemy enemy = new Enemy("Monster", 42, 5);
         enemies.add(enemy);
         player = Game.player;
         deck = player.getDeck();
         this.terminal = terminal;
 
-        MAX_Y_POSITION = terminal.getHeightInCharacters() - 1;
-
+        player.resetMana();
         startPlayerTurn();
     }
 
@@ -54,14 +58,27 @@ public class BattleScreen implements Screen {
             return;
         }
 
+        if (player.isDead()) {
+            terminal.write("YOU'VE LOST PLAY AGAIN", 2, 2);
+        }
+
         renderPlayer();
         renderEnemies();
         renderHand();
         renderCursor();
+        renderHelp();
+    }
+
+    private void renderHelp() {
+        terminal.write("Press [e] to end your turn or the card number to play it.", TEXT_X_OFFSET, HELP_OFFSET);
     }
 
     private void startPlayerTurn() {
         for (int x = 0; x < player.CARD_DRAW_COUNT; x++) {
+            if (deck.size() == 0) {
+                deck.addCards(discarded.popCards());
+                deck.shuffle();
+            }
             hand.addCard(deck.drawCard());
         }
     }
@@ -79,7 +96,7 @@ public class BattleScreen implements Screen {
 
     private void renderHand() {
         int count = 1;
-        int y = MAX_Y_POSITION - hand.getCards().size();
+        int y = CARD_START_Y_POSITION;
 
         for (Card card : hand.getCards()) {
             terminal.write(count + ": " + card.toBattleStatus(), TEXT_X_OFFSET, y + count);
@@ -89,6 +106,24 @@ public class BattleScreen implements Screen {
 
     private void renderCursor() {
         terminal.write('>', CURSOR_X_OFFSET, cursorPosition);
+    }
+
+    private void endPlayerTurn() {
+        if (player.isDead()) {
+            return;
+        }
+
+        discarded.addCards(hand.popCards());
+
+        player.resetMana();
+        startEnemyTurn();
+    }
+
+    private void startEnemyTurn() {
+        for (Enemy enemy : enemies) {
+            enemy.attack(player);
+        }
+        startPlayerTurn();
     }
 
     @Override
@@ -105,7 +140,7 @@ public class BattleScreen implements Screen {
                 break;
 
             case KeyEvent.VK_ENTER:
-                playCardAtIndex(MAX_Y_POSITION - cursorPosition);
+                playCardAtIndex(cursorPosition - CARD_START_Y_POSITION);
                 break;
             case KeyEvent.VK_1:
                 // TODO: Make a key map for this when I have internet
@@ -135,23 +170,36 @@ public class BattleScreen implements Screen {
             case KeyEvent.VK_9:
                 playCardAtIndex(8);
                 break;
+
+            case KeyEvent.VK_E:
+                endPlayerTurn();
+                break;
         }
 
         return this;
     }
 
     private void playCardAtIndex(final int index) {
-        if (0 > index || index > hand.getCards().size()) {
+        if (index < 0 || index > hand.size() - 1) {
             return;
         }
 
         final Card card = hand.getCardAtIndex(index);
+
+        if (card.getCost() > player.getMana()) {
+            System.out.println("Can't play, too expensive.");
+            return;
+        }
+
         if (card.needsTarget()) {
             Enemy enemy = enemies.get(0);
             card.play(enemy);
+            player.useMana(card.getCost());
             if (enemy.isDead()) {
                 enemies.remove(enemy);
             }
         }
+        hand.removeCard(card);
+        discarded.addCard(card);
     }
 }
