@@ -1,39 +1,33 @@
 package spirelike;
 
 
-import lombok.Data;
-
 import lombok.Getter;
-import lombok.Setter;
-import lombok.Singular;
-import spirelike.CardCollection;
 import spirelike.cards.Card;
+import spirelike.cards.CardCollection;
+import spirelike.cards.CardType;
 
-@Data
-public class Player {
+import java.util.ArrayList;
 
+public class Player extends Creature {
+
+    @Getter
     private final CardCollection deck = new CardCollection();
-
-    private static final int STARTING_HEALTH = 30;
-
-    @Getter
-    @Setter
-    private int maxHealth = STARTING_HEALTH;
-
-    @Getter
-    @Setter private int health;
 
     private static final int STARTING_MANA = 3;
     private int maxMana = STARTING_MANA;
+
+    @Getter
     private int mana;
     public int CARD_DRAW_COUNT = 5;
 
+    public Player(String name, int maxHealth) {
+        super(name, maxHealth);
+    }
 
-    public Player() {
-        this.health = this.maxHealth;
-
-        Card strike = new Card("Strike", 5, 0, 1);
-        Card defend = new Card("Defend", 0, 5, 1);
+    public void createDeck() {
+        deck.clear();
+        Card strike = new Card("Strike", 5, 0, 1, CardType.ATTACK);
+        Card defend = new Card("Defend", 0, 5, 1, CardType.SKILL);
         for (int i=0; i < 5; i++) {
             deck.addCard(strike);
             deck.addCard(defend);
@@ -45,22 +39,34 @@ public class Player {
     }
 
     public String toBattleStats() {
-        return "Health: " + health + " / " + maxHealth + ", Mana: " + mana + " / " + maxMana;
+        return "Health: " + health + " / " + maxHealth + ", Block: " + block + ", Mana: " + mana + " / " + maxMana;
     }
 
     public void resetMana() {
         mana = maxMana;
     }
 
-    public void useMana(final int usedMana) {
+    public void spendMana(final int usedMana) {
         mana -= usedMana;
     }
 
-    public void reduceHealth(int damage) {
-        this.health -= damage;
+    /*
+     * Play an untargetted card, such as a power or skill.
+     */
+    public void playCard(Card card) {
+        addBlock(card.getBlock());
     }
 
-    public boolean isDead() {
-        return this.health <= 0;
+    /*
+     * Target a single monster with a card.
+     */
+    public void playCardOnMonster(Card card, Monster monster) {
+        monster.defend(card.getDamage());
+    }
+
+    /*
+     * Target multiple monsters with a card.
+     */
+    public void playCardOnMonsters(Card card, ArrayList<Monster> monsters) {
     }
 }

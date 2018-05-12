@@ -1,4 +1,4 @@
-package spirelike;
+package spirelike.cards;
 
 import lombok.Data;
 import spirelike.cards.Card;
@@ -55,7 +55,11 @@ public class CardCollection {
     public List<Card> popCards() {
         List<Card> poppedCards = new ArrayList<>();
         poppedCards.addAll(cards);
-        cards.clear();
+        clear();
         return poppedCards;
+    }
+
+    public void clear() {
+        cards.clear();
     }
 }

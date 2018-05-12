@@ -17,7 +17,8 @@ public class Game {
     private AsciiPanel terminal;
 
     public Game(AsciiPanel terminal) {
-        this.player = new Player();
+        this.player = new Player("Tester", 50);
+        this.player.createDeck();
         this.terminal = terminal;
         this.screen = new StartScreen(terminal);
     }

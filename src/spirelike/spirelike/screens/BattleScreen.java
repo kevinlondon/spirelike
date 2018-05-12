@@ -1,22 +1,20 @@
 package spirelike.screens;
 
 import asciiPanel.AsciiPanel;
-import spirelike.CardCollection;
-import spirelike.Enemy;
+import spirelike.cards.CardCollection;
+import spirelike.Monster;
 import spirelike.core.Game;
 import spirelike.Player;
 import spirelike.cards.Card;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Map;
 
 import static java.lang.Thread.sleep;
 
 public class BattleScreen implements Screen {
 
-    private ArrayList<Enemy> enemies;
+    private ArrayList<Monster> monsters;
     private Player player;
     private AsciiPanel terminal;
 
@@ -38,9 +36,9 @@ public class BattleScreen implements Screen {
     private int cursorPosition = PLAYER_Y_OFFSET;  // default to selecting where the player is
 
     public BattleScreen(final AsciiPanel terminal) {
-        enemies = new ArrayList<>();
-        Enemy enemy = new Enemy("Monster", 42, 5);
-        enemies.add(enemy);
+        monsters = new ArrayList<>();
+        Monster monster = new Monster("Monster", 42);
+        monsters.add(monster);
         player = Game.player;
         deck = player.getDeck();
         this.terminal = terminal;
@@ -53,7 +51,7 @@ public class BattleScreen implements Screen {
     public void displayOutput() {
         this.terminal = terminal;
 
-        if (enemies.isEmpty()) {
+        if (monsters.isEmpty()) {
             terminal.write("A WINNER IS YOU", 2, 3);
             return;
         }
@@ -74,6 +72,11 @@ public class BattleScreen implements Screen {
     }
 
     private void startPlayerTurn() {
+        drawCards();
+        resetBlock();
+    }
+
+    private void drawCards() {
         for (int x = 0; x < player.CARD_DRAW_COUNT; x++) {
             if (deck.size() == 0) {
                 deck.addCards(discarded.popCards());
@@ -83,14 +86,21 @@ public class BattleScreen implements Screen {
         }
     }
 
+    private void resetBlock() {
+        player.setBlock(0);
+        for (Monster monster : monsters) {
+            monster.setBlock(0);
+        }
+    }
+
     private void renderPlayer() {
         terminal.write(player.toBattleStats(), TEXT_X_OFFSET, PLAYER_Y_OFFSET);
     }
 
     private void renderEnemies() {
         int y = ENEMY_START_Y_POSITION;
-        for (Enemy enemy : enemies) {
-            terminal.write(enemy.toBattleStatus(), TEXT_X_OFFSET, y);
+        for (Monster monster : monsters) {
+            terminal.write(monster.toBattleStatus(), TEXT_X_OFFSET, y);
         }
     }
 
@@ -120,8 +130,8 @@ public class BattleScreen implements Screen {
     }
 
     private void startEnemyTurn() {
-        for (Enemy enemy : enemies) {
-            enemy.attack(player);
+        for (Monster monster : monsters) {
+            monster.attack(player);
         }
         startPlayerTurn();
     }
@@ -191,14 +201,24 @@ public class BattleScreen implements Screen {
             return;
         }
 
-        if (card.needsTarget()) {
-            Enemy enemy = enemies.get(0);
-            card.play(enemy);
-            player.useMana(card.getCost());
-            if (enemy.isDead()) {
-                enemies.remove(enemy);
+        if (card.isAttack()) {
+            if (card.needsTarget()) {
+                Monster monster = monsters.get(0);
+                player.playCardOnMonster(card, monster);
+            } else {
+                player.playCardOnMonsters(card, monsters);
             }
+
+            for (Monster monster : monsters) {
+                if (monster.isDead()) {
+                    monsters.remove(monster);
+                }
+            }
+        } else {
+            player.playCard(card);
         }
+
+        player.spendMana(card.getCost());
         hand.removeCard(card);
         discarded.addCard(card);
     }

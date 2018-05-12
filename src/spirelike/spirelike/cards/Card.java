@@ -1,7 +1,8 @@
 package spirelike.cards;
 
 import lombok.ToString;
-import spirelike.Enemy;
+import spirelike.Monster;
+import spirelike.core.Game;
 
 @ToString
 public class Card {
@@ -10,12 +11,14 @@ public class Card {
     private final int baseDamage;
     private final int baseBlock;
     private final int baseCost;
+    private final CardType type;
 
-    public Card(String name, int baseDamage, int baseBlock, int baseCost) {
+    public Card(String name, int baseDamage, int baseBlock, int baseCost, CardType type) {
         this.name = name;
         this.baseDamage = baseDamage;
         this.baseBlock = baseBlock;
         this.baseCost = baseCost;
+        this.type = type;
     }
 
     public boolean needsTarget() {
@@ -34,11 +37,15 @@ public class Card {
         return this.baseBlock;
     }
 
-    public void play(Enemy enemy) {
-        enemy.reduceHealth(this.getDamage());
-    }
-
     public String toBattleStatus() {
         return this.name + " - Mana Cost: " + this.getCost() + ", Damage: " + this.getDamage() + ", Block: " + this.getBlock();
+    }
+
+    public void play() {
+        Game.player.addBlock(this.getBlock());
+    }
+
+    public boolean isAttack() {
+        return type == CardType.ATTACK;
     }
 }
