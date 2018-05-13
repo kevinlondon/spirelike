@@ -20,7 +20,9 @@ public abstract class Creature {
     @Setter
     protected int maxHealth;
 
-    protected int baseDamage;
+    @Getter
+    @Setter
+    protected int strength = 0;
 
     @Getter
     @Setter
@@ -57,7 +59,4 @@ public abstract class Creature {
         this.health -= remainingDamage;
     }
 
-    public int getDamage() {
-        return this.baseDamage;
-    }
 }

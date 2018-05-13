@@ -53,10 +53,15 @@ public class CardCollection {
     }
 
     public List<Card> popCards() {
-        List<Card> poppedCards = new ArrayList<>();
-        poppedCards.addAll(cards);
+        List<Card> cardCopies = getCards();
         clear();
-        return poppedCards;
+        return cardCopies;
+    }
+
+    public List<Card> getCards() {
+        List<Card> cardCopy = new ArrayList<>();
+        cardCopy.addAll(cards);
+        return cardCopy;
     }
 
     public void clear() {

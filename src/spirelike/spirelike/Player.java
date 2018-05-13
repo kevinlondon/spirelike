@@ -35,11 +35,14 @@ public class Player extends Creature {
     }
 
     public String toStatusLine() {
-        return "Player Status Line";
+        return "Health: " + health + "/" + maxHealth +
+                ", Deck Size: " + deck.size();
     }
 
     public String toBattleStats() {
-        return "Health: " + health + " / " + maxHealth + ", Block: " + block + ", Mana: " + mana + " / " + maxMana;
+        return "Player " + name +
+                ", Health: " + health + "/" + maxHealth +
+                ", Block: " + block;
     }
 
     public void resetMana() {

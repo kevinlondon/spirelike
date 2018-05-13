@@ -18,7 +18,7 @@ public class BattleScreen implements Screen {
     private Player player;
     private AsciiPanel terminal;
 
-    private final CardCollection deck;
+    private final CardCollection deck = new CardCollection();
     private final CardCollection hand = new CardCollection();
     private final CardCollection discarded = new CardCollection();
     private final CardCollection exhausted = new CardCollection();
@@ -29,22 +29,31 @@ public class BattleScreen implements Screen {
 
     private static int CURSOR_X_OFFSET = 1;
     private static int TEXT_X_OFFSET = CURSOR_X_OFFSET + 3;
-    private static int CARD_START_Y_POSITION = 13;  // max height of 23 at the moment, max cards of 9.
+    private static int CARD_START_Y_POSITION = 12;  // max height of 23 at the moment, max cards of 9.
 
-    private static int HELP_OFFSET = CARD_START_Y_POSITION + MAX_HAND_CARDS + 1;
+    private static int DECK_SIZE_OFFSET = CARD_START_Y_POSITION + MAX_HAND_CARDS + 1;
+    private static int HELP_OFFSET = DECK_SIZE_OFFSET + 1;
 
     private int cursorPosition = PLAYER_Y_OFFSET;  // default to selecting where the player is
 
     public BattleScreen(final AsciiPanel terminal) {
+        initializeMonsters();
+        initializePlayer();
+        this.terminal = terminal;
+        startPlayerTurn();
+    }
+
+    private void initializePlayer() {
+        player = Game.player;
+        deck.addCards(player.getDeck().getCards());
+        player.resetMana();
+    }
+
+    private void initializeMonsters() {
         monsters = new ArrayList<>();
         Monster monster = new Monster("Monster", 42);
+        monster.setActions();
         monsters.add(monster);
-        player = Game.player;
-        deck = player.getDeck();
-        this.terminal = terminal;
-
-        player.resetMana();
-        startPlayerTurn();
     }
 
     @Override
@@ -63,6 +72,7 @@ public class BattleScreen implements Screen {
         renderPlayer();
         renderEnemies();
         renderHand();
+        renderDeckSizes();
         renderCursor();
         renderHelp();
     }
@@ -74,6 +84,13 @@ public class BattleScreen implements Screen {
     private void startPlayerTurn() {
         drawCards();
         resetBlock();
+        resetMonsterActions();
+    }
+
+    private void resetMonsterActions() {
+        for (Monster monster : monsters) {
+            monster.setNextAction();
+        }
     }
 
     private void drawCards() {
@@ -106,12 +123,17 @@ public class BattleScreen implements Screen {
 
     private void renderHand() {
         int count = 1;
-        int y = CARD_START_Y_POSITION;
 
         for (Card card : hand.getCards()) {
-            terminal.write(count + ": " + card.toBattleStatus(), TEXT_X_OFFSET, y + count);
+            terminal.write(count + ": " + card.toBattleStatus(), TEXT_X_OFFSET, CARD_START_Y_POSITION + count);
             count += 1;
         }
+
+    }
+
+    private void renderDeckSizes() {
+        final String deckSizes = "Draw Pile: " + deck.size() + ", Discarded: " + discarded.size() + ", Exhausted: " + exhausted.size();
+        terminal.write(deckSizes, TEXT_X_OFFSET, DECK_SIZE_OFFSET);
     }
 
     private void renderCursor() {
@@ -131,7 +153,7 @@ public class BattleScreen implements Screen {
 
     private void startEnemyTurn() {
         for (Monster monster : monsters) {
-            monster.attack(player);
+            monster.takeAction(player);
         }
         startPlayerTurn();
     }
