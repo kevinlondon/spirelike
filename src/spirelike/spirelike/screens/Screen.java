@@ -4,9 +4,10 @@ import asciiPanel.AsciiPanel;
 
 import java.awt.event.KeyEvent;
 
-public interface Screen {
+public abstract class Screen {
 
-    void displayOutput();
+    AsciiPanel terminal;
 
-    Screen respondToUserInput(KeyEvent key);
+    abstract public void displayOutput();
+    abstract public Screen respondToUserInput(KeyEvent key);
 }

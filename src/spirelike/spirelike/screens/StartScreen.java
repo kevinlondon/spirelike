@@ -5,9 +5,8 @@ import spirelike.core.Game;
 
 import java.awt.event.KeyEvent;
 
-public class StartScreen implements Screen {
+public class StartScreen extends Screen {
 
-    private AsciiPanel terminal;
 
     public StartScreen(final AsciiPanel terminal) {
         this.terminal = terminal;

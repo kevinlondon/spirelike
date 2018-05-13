@@ -1,8 +1,15 @@
 package spirelike.screens;
 
+import asciiPanel.AsciiPanel;
+import spirelike.BattleDifficulty;
+
 import java.awt.event.KeyEvent;
 
-public class BattleWinScreen implements Screen{
+public class BattleWinScreen extends Screen{
+
+    public BattleWinScreen(AsciiPanel terminal) {
+        this.terminal = terminal;
+    }
 
     @Override
     public void displayOutput() {
@@ -12,5 +19,9 @@ public class BattleWinScreen implements Screen{
     @Override
     public Screen respondToUserInput(KeyEvent key) {
         return null;
+    }
+
+    public void addRewards(BattleDifficulty battleDifficulty) {
+
     }
 }

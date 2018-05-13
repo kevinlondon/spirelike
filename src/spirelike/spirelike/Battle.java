@@ -5,5 +5,4 @@ import spirelike.screens.BattleScreen;
 
 @Data
 public class Battle {
-
 }

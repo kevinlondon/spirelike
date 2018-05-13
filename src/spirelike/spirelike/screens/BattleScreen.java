@@ -1,6 +1,7 @@
 package spirelike.screens;
 
 import asciiPanel.AsciiPanel;
+import spirelike.BattleDifficulty;
 import spirelike.cards.CardCollection;
 import spirelike.Monster;
 import spirelike.core.Game;
@@ -9,14 +10,16 @@ import spirelike.cards.Card;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import static java.lang.Thread.sleep;
 
-public class BattleScreen implements Screen {
+public class BattleScreen extends Screen {
 
     private ArrayList<Monster> monsters;
     private Player player;
     private AsciiPanel terminal;
+    private BattleDifficulty battleDifficulty;
 
     private final CardCollection deck = new CardCollection();
     private final CardCollection hand = new CardCollection();
@@ -37,10 +40,11 @@ public class BattleScreen implements Screen {
     private int cursorPosition = PLAYER_Y_OFFSET;  // default to selecting where the player is
 
     public BattleScreen(final AsciiPanel terminal) {
+        this.terminal = terminal;
         initializeMonsters();
         initializePlayer();
-        this.terminal = terminal;
         startPlayerTurn();
+        battleDifficulty = BattleDifficulty.NORMAL;
     }
 
     private void initializePlayer() {
@@ -58,17 +62,6 @@ public class BattleScreen implements Screen {
 
     @Override
     public void displayOutput() {
-        this.terminal = terminal;
-
-        if (monsters.isEmpty()) {
-            terminal.write("A WINNER IS YOU", 2, 3);
-            return;
-        }
-
-        if (player.isDead()) {
-            terminal.write("YOU'VE LOST PLAY AGAIN", 2, 2);
-        }
-
         renderPlayer();
         renderEnemies();
         renderHand();
@@ -208,7 +201,19 @@ public class BattleScreen implements Screen {
                 break;
         }
 
-        return this;
+        return getNextScreen();
+    }
+
+    private Screen getNextScreen() {
+        if (monsters.isEmpty()) {
+            BattleWinScreen screen = new BattleWinScreen(terminal);
+            screen.addRewards(battleDifficulty);
+            return screen;
+        } else if (player.isDead()) {
+            return new LoseScreen(terminal);
+        } else {
+            return this;
+        }
     }
 
     private void playCardAtIndex(final int index) {
