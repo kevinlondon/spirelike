@@ -15,6 +15,7 @@ public class Player extends Creature {
 
     private static final int STARTING_MANA = 3;
     private int maxMana = STARTING_MANA;
+    private int gold = 99;
 
     @Getter
     private int mana;
@@ -22,6 +23,11 @@ public class Player extends Creature {
 
     public Player(String name, int maxHealth) {
         super(name, maxHealth);
+        initialize();
+    }
+
+    private void initialize() {
+        createDeck();
     }
 
     public void createDeck() {
@@ -36,6 +42,7 @@ public class Player extends Creature {
 
     public String toStatusLine() {
         return "Health: " + health + "/" + maxHealth +
+                ", Gold: " + gold +
                 ", Deck Size: " + deck.size();
     }
 

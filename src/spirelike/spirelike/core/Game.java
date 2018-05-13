@@ -3,6 +3,7 @@ package spirelike.core;
 import asciiPanel.AsciiPanel;
 import lombok.Data;
 import spirelike.Player;
+import spirelike.cards.CardCollection;
 import spirelike.screens.Screen;
 import spirelike.screens.StartScreen;
 
@@ -11,6 +12,7 @@ import java.awt.event.KeyEvent;
 @Data
 public class Game {
     public static Player player;
+    public static CardCollection cardCollection;
     private Dungeon dungeon;
 
     private Screen screen;
@@ -18,7 +20,7 @@ public class Game {
 
     public Game(AsciiPanel terminal) {
         this.player = new Player("Tester", 50);
-        this.player.createDeck();
+        this.cardCollection = new CardCollection();
         this.terminal = terminal;
         this.screen = new StartScreen(terminal);
     }
