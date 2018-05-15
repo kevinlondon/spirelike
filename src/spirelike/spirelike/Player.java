@@ -26,11 +26,11 @@ public class Player extends Creature {
         initialize();
     }
 
-    private void initialize() {
+    public void initialize() {
         createDeck();
     }
 
-    public void createDeck() {
+    private void createDeck() {
         deck.clear();
         Card strike = new Card("Strike", 5, 0, 1, CardType.ATTACK);
         Card defend = new Card("Defend", 0, 5, 1, CardType.SKILL);

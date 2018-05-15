@@ -236,7 +236,8 @@ public class BattleScreen extends Screen {
                 player.playCardOnMonsters(card, monsters);
             }
 
-            for (Monster monster : monsters) {
+            List<Monster> monsterIterator = new ArrayList<>(monsters);
+            for (Monster monster : monsterIterator) {
                 if (monster.isDead()) {
                     monsters.remove(monster);
                 }
