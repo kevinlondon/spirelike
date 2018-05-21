@@ -1,13 +1,8 @@
-package spirelike;
-
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+package com.kevinlondon.spirelike;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Random;
 
 public class Monster extends Creature {
 

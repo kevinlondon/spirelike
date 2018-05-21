@@ -1,10 +1,12 @@
-package spirelike.screens;
+package com.kevinlondon.spirelike.screens;
 
 import asciiPanel.AsciiPanel;
 
 import java.awt.event.KeyEvent;
 
 public class LoseScreen extends Screen {
+
+    private AsciiPanel terminal;
 
     LoseScreen(AsciiPanel terminal) {
         this.terminal = terminal;

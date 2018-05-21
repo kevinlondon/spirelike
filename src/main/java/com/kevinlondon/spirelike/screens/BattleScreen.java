@@ -1,12 +1,12 @@
-package spirelike.screens;
+package com.kevinlondon.spirelike.screens;
 
 import asciiPanel.AsciiPanel;
-import spirelike.BattleDifficulty;
-import spirelike.cards.CardCollection;
-import spirelike.Monster;
-import spirelike.core.Game;
-import spirelike.Player;
-import spirelike.cards.Card;
+import com.kevinlondon.spirelike.BattleDifficulty;
+import com.kevinlondon.spirelike.cards.Card;
+import com.kevinlondon.spirelike.cards.CardCollection;
+import com.kevinlondon.spirelike.core.Game;
+import com.kevinlondon.spirelike.Monster;
+import com.kevinlondon.spirelike.Player;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;

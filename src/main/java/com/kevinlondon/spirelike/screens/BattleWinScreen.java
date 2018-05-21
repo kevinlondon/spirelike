@@ -1,14 +1,12 @@
-package spirelike.screens;
+package com.kevinlondon.spirelike.screens;
 
 import asciiPanel.AsciiPanel;
+import com.kevinlondon.spirelike.BattleDifficulty;
+import com.kevinlondon.spirelike.cards.Card;
+import com.kevinlondon.spirelike.cards.CardLibrary;
 import lombok.Getter;
-import spirelike.BattleDifficulty;
-import spirelike.cards.Card;
-import spirelike.cards.CardLibrary;
-import spirelike.core.Game;
 
 import java.awt.event.KeyEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 public class BattleWinScreen extends Screen{

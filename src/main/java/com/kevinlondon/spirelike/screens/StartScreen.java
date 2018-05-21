@@ -1,7 +1,6 @@
-package spirelike.screens;
+package com.kevinlondon.spirelike.screens;
 
 import asciiPanel.AsciiPanel;
-import spirelike.core.Game;
 
 import java.awt.event.KeyEvent;
 
@@ -18,7 +17,7 @@ public class StartScreen extends Screen {
     }
 
     @Override
-    public spirelike.screens.Screen respondToUserInput(KeyEvent key) {
+    public Screen respondToUserInput(KeyEvent key) {
         if (key.getKeyCode() == KeyEvent.VK_ENTER) {
             // initialize game
             // Create screen, which should initialize itself

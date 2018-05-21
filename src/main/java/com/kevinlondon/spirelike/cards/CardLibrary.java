@@ -1,6 +1,5 @@
-package spirelike.cards;
+package com.kevinlondon.spirelike.cards;
 
-import java.util.Arrays;
 import java.util.List;
 
 /* Collection of all possible cards for a character. */

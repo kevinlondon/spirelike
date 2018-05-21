@@ -1,8 +1,7 @@
-package spirelike.cards;
+package com.kevinlondon.spirelike.cards;
 
+import com.kevinlondon.spirelike.core.Game;
 import lombok.ToString;
-import spirelike.Monster;
-import spirelike.core.Game;
 
 @ToString
 public class Card {

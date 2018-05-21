@@ -1,12 +1,11 @@
-package spirelike.core;
+package com.kevinlondon.spirelike.core;
 
 import asciiPanel.AsciiPanel;
 import lombok.Data;
-import spirelike.Player;
-import spirelike.cards.CardCollection;
-import spirelike.cards.CardLibrary;
-import spirelike.screens.Screen;
-import spirelike.screens.StartScreen;
+import com.kevinlondon.spirelike.Player;
+import com.kevinlondon.spirelike.cards.CardLibrary;
+import com.kevinlondon.spirelike.screens.Screen;
+import com.kevinlondon.spirelike.screens.StartScreen;
 
 import java.awt.event.KeyEvent;
 

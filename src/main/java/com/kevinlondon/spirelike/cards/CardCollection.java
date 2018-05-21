@@ -1,7 +1,6 @@
-package spirelike.cards;
+package com.kevinlondon.spirelike.cards;
 
 import lombok.Data;
-import spirelike.cards.Card;
 
 import java.util.ArrayList;
 import java.util.Collections;

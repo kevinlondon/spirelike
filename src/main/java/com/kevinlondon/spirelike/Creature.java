@@ -1,4 +1,4 @@
-package spirelike;
+package com.kevinlondon.spirelike;
 
 import lombok.Getter;
 import lombok.Setter;

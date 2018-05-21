@@ -1,15 +1,18 @@
-package spirelike;
+package com.kevinlondon.spirelike;
+import com.kevinlondon.spirelike.core.Game;
+import com.valkryst.VTerminal.Screen;
+
 
 import javax.swing.JFrame;
 import asciiPanel.AsciiPanel;
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import spirelike.core.Game;
-
 public class Launcher extends JFrame implements KeyListener {
 
-    private AsciiPanel terminal;
+    private final AsciiPanel terminal;
+
     private Game game;
 
     public Launcher(){

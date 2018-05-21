@@ -1,12 +1,12 @@
-package spirelike;
+package com.kevinlondon.spirelike;
 
 import javax.swing.JFrame;
 import asciiPanel.AsciiPanel;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import spirelike.core.Game;
-import spirelike.screens.Screen;
+import com.kevinlondon.spirelike.core.Game;
+import com.kevinlondon.spirelike.screens.Screen;
 
 public class ApplicationMain extends JFrame implements KeyListener {
     private static final long serialVersionUID = 1060623638149583738L;

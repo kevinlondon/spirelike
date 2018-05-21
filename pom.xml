@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kevinlondon</groupId>
+    <artifactId>spirelike</artifactId>
+    <version>1.0-SNAPSHOT</version>
+
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <exec.mainClass>com.kevinlondon.spirelike.Launcher</exec.mainClass>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>jitpack.io</id>
+            <url>https://jitpack.io</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.github.Valkryst</groupId>
+            <artifactId>VTerminal</artifactId>
+            <version>3.3.0-BETA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.github.trystan</groupId>
+            <artifactId>AsciiPanel</artifactId>
+            <version>7b0dbce5c882d4a4725cc001286eeddaeae06f67</version>
+        </dependency>
+
+    </dependencies>
+</project>

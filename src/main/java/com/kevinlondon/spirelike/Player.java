@@ -1,10 +1,10 @@
-package spirelike;
+package com.kevinlondon.spirelike;
 
 
+import com.kevinlondon.spirelike.cards.Card;
+import com.kevinlondon.spirelike.cards.CardCollection;
+import com.kevinlondon.spirelike.cards.CardType;
 import lombok.Getter;
-import spirelike.cards.Card;
-import spirelike.cards.CardCollection;
-import spirelike.cards.CardType;
 
 import java.util.ArrayList;
 

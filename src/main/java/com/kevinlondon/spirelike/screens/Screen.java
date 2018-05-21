@@ -1,4 +1,5 @@
-package spirelike.screens;
+package com.kevinlondon.spirelike.screens;
+
 
 import asciiPanel.AsciiPanel;
 

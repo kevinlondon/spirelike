@@ -1,4 +1,4 @@
-package spirelike;
+package com.kevinlondon.spirelike;
 
 public class MonsterAction {
 
