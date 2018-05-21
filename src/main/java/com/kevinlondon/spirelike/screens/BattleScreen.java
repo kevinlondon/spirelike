@@ -2,6 +2,7 @@ package com.kevinlondon.spirelike.screens;
 
 import asciiPanel.AsciiPanel;
 import com.kevinlondon.spirelike.BattleDifficulty;
+import com.kevinlondon.spirelike.EventLog;
 import com.kevinlondon.spirelike.cards.Card;
 import com.kevinlondon.spirelike.cards.CardCollection;
 import com.kevinlondon.spirelike.core.Game;
@@ -68,6 +69,7 @@ public class BattleScreen extends Screen {
         renderDeckSizes();
         renderCursor();
         renderHelp();
+        EventLog.render(terminal, 27);
     }
 
     private void renderHelp() {

@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Monster extends Creature {
 
-    private List<MonsterAction> actions;
+    private List<MonsterAction> actions = new ArrayList<>();
     private MonsterAction nextAction;
 
     public Monster(String name, int maxHealth) {
@@ -14,7 +14,6 @@ public class Monster extends Creature {
     }
 
     public void setActions() {
-        actions = new ArrayList<>();
         actions.add(new MonsterAction(1, 10, MonsterActionType.ATTACK));
         actions.add(new MonsterAction(2, 4, MonsterActionType.ATTACK));
         actions.add(new MonsterAction(1, 6, MonsterActionType.BLOCK));

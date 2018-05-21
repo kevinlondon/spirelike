@@ -65,6 +65,7 @@ public class Player extends Creature {
      */
     public void playCard(Card card) {
         addBlock(card.getBlock());
+        EventLog.add(String.format("Added %d block", card.getBlock()));
     }
 
     /*

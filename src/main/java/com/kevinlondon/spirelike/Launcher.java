@@ -1,4 +1,5 @@
 package com.kevinlondon.spirelike;
+import asciiPanel.AsciiFont;
 import com.kevinlondon.spirelike.core.Game;
 import com.valkryst.VTerminal.Screen;
 
@@ -12,12 +13,14 @@ import java.awt.event.KeyListener;
 public class Launcher extends JFrame implements KeyListener {
 
     private final AsciiPanel terminal;
+    public final static int GAME_HEIGHT = 32;
+    public final static int GAME_WIDTH = 80;
 
     private Game game;
 
     public Launcher(){
         super();
-        terminal = new AsciiPanel();
+        terminal = new AsciiPanel(GAME_WIDTH, GAME_HEIGHT);
         add(terminal);
         pack();
         game = new Game(terminal);
