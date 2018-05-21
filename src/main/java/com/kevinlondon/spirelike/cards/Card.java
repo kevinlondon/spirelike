@@ -37,7 +37,10 @@ public class Card {
     }
 
     public String toBattleStatus() {
-        return this.name + " - Mana Cost: " + this.getCost() + ", Damage: " + this.getDamage() + ", Block: " + this.getBlock();
+        String battleStatus = String.format("%s - %d Mana Cost", this.name, this.getCost());
+        battleStatus += (this.getDamage() > 0) ? String.format(", %d damage", this.getDamage()) : "";
+        battleStatus += (this.getBlock() > 0) ? String.format(", %d block", this.getBlock()) : "";
+        return battleStatus;
     }
 
     public void play() {
