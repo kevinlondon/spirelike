@@ -14,8 +14,12 @@ At the moment, the instructions are basically:
 
 0. Install Java
 1. Clone repo
-2. Open in your IDE
-3. Run it.
+2. From the root, run:
+
+```
+mvn install
+mvn exec:java
+```
 
 Almost everything is still in its beginning stages so don't expect
 a particularly interesting game yet.
