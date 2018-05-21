@@ -46,17 +46,22 @@ public abstract class Creature {
 
 
     public void defend(final int damage) {
+        String event = "";
         int remainingDamage = damage;
 
         if (remainingDamage <= block) {
+            event += String.format("%s blocked %d damage. ", name, block-damage);
             block -= damage;
             remainingDamage = 0;
         } else {
+            event += String.format("%s blocked %d damage. ", name, damage-block);
             remainingDamage -= block;
             block = 0;
         }
 
         this.health -= remainingDamage;
+        event += String.format("%s took %d damage.", name, remainingDamage);
+        EventLog.add(event);
     }
 
 }
