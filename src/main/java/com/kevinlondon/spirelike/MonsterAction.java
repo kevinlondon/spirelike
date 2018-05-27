@@ -27,7 +27,6 @@ public class MonsterAction {
         }
     }
 
-
     public String toString() {
         String description = "";
         if (type == MonsterActionType.ATTACK) {

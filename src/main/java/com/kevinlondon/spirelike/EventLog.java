@@ -13,12 +13,18 @@ public class EventLog {
         events.add(event);
     }
 
+    /*
+     * Starting from the bottom of the pane, write messages from bottom to top.
+     * Most recent messages live at the bottom. Older ones live at the top.
+     */
     public static void render(final AsciiPanel terminal, final int yOffset) {
         for (int i = 0; i < events.size(); i++) {
             if (i > DISPLAY_SIZE)
                 break;
 
-            terminal.write(events.get(events.size() - i - 1), 0, yOffset + i);
+            final int lineNumber = yOffset + DISPLAY_SIZE - i;
+            final String event = events.get(events.size() - i - 1);
+            terminal.write(event, 0, lineNumber);
         }
     }
 }

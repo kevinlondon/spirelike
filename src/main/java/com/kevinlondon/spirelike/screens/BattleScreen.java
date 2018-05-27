@@ -78,7 +78,7 @@ public class BattleScreen extends Screen {
 
     private void startPlayerTurn() {
         drawCards();
-        resetBlock();
+        player.setBlock(0);
         resetMonsterActions();
     }
 
@@ -95,13 +95,6 @@ public class BattleScreen extends Screen {
                 deck.shuffle();
             }
             hand.addCard(deck.drawCard());
-        }
-    }
-
-    private void resetBlock() {
-        player.setBlock(0);
-        for (Monster monster : monsters) {
-            monster.setBlock(0);
         }
     }
 
@@ -141,13 +134,13 @@ public class BattleScreen extends Screen {
         }
 
         discarded.addCards(hand.popCards());
-
         player.resetMana();
         startEnemyTurn();
     }
 
     private void startEnemyTurn() {
         for (Monster monster : monsters) {
+            // monster.setBlock(0);
             monster.takeAction(player);
         }
         startPlayerTurn();
@@ -155,8 +148,6 @@ public class BattleScreen extends Screen {
 
     @Override
     public Screen respondToUserInput(KeyEvent key) {
-        final int selectedIndex;
-
         switch (key.getKeyCode()){
             case KeyEvent.VK_UP:
                 cursorPosition = Math.max(cursorPosition - 1, 0);

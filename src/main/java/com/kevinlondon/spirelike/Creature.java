@@ -54,7 +54,9 @@ public abstract class Creature {
             block -= damage;
             remainingDamage = 0;
         } else {
-            event += String.format("%s blocked %d damage. ", name, damage-block);
+            if (block > 0) {
+                event += String.format("%s blocked %d damage. ", name, damage - block);
+            }
             remainingDamage -= block;
             block = 0;
         }

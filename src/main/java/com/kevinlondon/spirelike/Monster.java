@@ -20,7 +20,10 @@ public class Monster extends Creature {
     }
 
     public String toBattleStatus() {
-        return this.name + ": " + health + "/" + maxHealth + ", Next Action: " + nextAction.toString();
+        return this.name + ": "
+                + health + "/" + maxHealth
+                + ", Block: " + block
+                + ", Next Action: " + nextAction.toString();
     }
 
     public void setNextAction() {
