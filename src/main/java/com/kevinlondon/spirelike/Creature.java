@@ -30,7 +30,6 @@ public abstract class Creature {
 
     protected List<Status> statuses;
 
-
     public Creature(String name, int maxHealth) {
         this.name = name;
         this.maxHealth = this.health = maxHealth;
@@ -38,6 +37,10 @@ public abstract class Creature {
 
     public void addBlock(int amount) {
         this.block += amount;
+    }
+
+    public void addStatus(Status status) {
+        this.statuses.add(status);
     }
 
     public boolean isDead() {
@@ -64,6 +67,10 @@ public abstract class Creature {
         this.health -= remainingDamage;
         event += String.format("%s took %d damage.", name, remainingDamage);
         EventLog.add(event);
+    }
+
+    public void attack(Creature target, int amount) {
+        target.defend(amount);
     }
 
 }

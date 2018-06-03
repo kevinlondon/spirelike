@@ -19,11 +19,6 @@ public class MonsterAction {
             } else {
                 creature.addBlock(amount);
             }
-            try {
-                Thread.sleep(100);
-            } catch (Exception e) {
-                System.out.println("Ignoring for now.");
-            }
         }
     }
 

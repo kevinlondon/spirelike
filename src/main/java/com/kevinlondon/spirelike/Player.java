@@ -80,4 +80,8 @@ public class Player extends Creature {
      */
     public void playCardOnMonsters(Card card, ArrayList<Monster> monsters) {
     }
+
+    public void discardCard() {
+        System.out.println("Do nothing for now.");
+    }
 }
