@@ -7,7 +7,7 @@ import java.util.List;
 
 public class WeakenEffect implements Effect {
 
-    public int duration = 0;
+    public int duration;
 
     public WeakenEffect(final int duration) {
         this.duration = duration;
@@ -16,7 +16,7 @@ public class WeakenEffect implements Effect {
     @Override
     public void apply(Creature actor, List<Creature> targets) {
         for (Creature target : targets) {
-            target.addStatus(Weak);
+            target.addStatus(new Weak(duration));
         }
     }
 }

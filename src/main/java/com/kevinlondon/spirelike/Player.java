@@ -7,6 +7,7 @@ import com.kevinlondon.spirelike.cards.CardType;
 import lombok.Getter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Creature {
 
@@ -78,7 +79,7 @@ public class Player extends Creature {
     /*
      * Target multiple monsters with a card.
      */
-    public void playCardOnMonsters(Card card, ArrayList<Monster> monsters) {
+    public void playCardOnMonsters(Card card, List<Monster> monsters) {
     }
 
     public void discardCard() {
