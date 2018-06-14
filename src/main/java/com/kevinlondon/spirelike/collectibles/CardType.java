@@ -1,4 +1,4 @@
-package com.kevinlondon.spirelike.cards;
+package com.kevinlondon.spirelike.collectibles;
 
 public enum CardType {
     ATTACK,

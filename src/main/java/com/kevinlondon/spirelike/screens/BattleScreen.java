@@ -3,7 +3,7 @@ package com.kevinlondon.spirelike.screens;
 import asciiPanel.AsciiPanel;
 import com.kevinlondon.spirelike.*;
 import com.kevinlondon.spirelike.renderers.Renderer;
-import com.kevinlondon.spirelike.cards.Card;
+import com.kevinlondon.spirelike.collectibles.cards.Card;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;

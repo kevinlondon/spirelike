@@ -1,5 +1,11 @@
-package com.kevinlondon.spirelike.cards;
+package com.kevinlondon.spirelike.collectibles;
 
+import com.kevinlondon.spirelike.collectibles.cards.AttackCard;
+import com.kevinlondon.spirelike.collectibles.cards.Card;
+import com.kevinlondon.spirelike.collectibles.cards.SkillCard;
+import com.kevinlondon.spirelike.effects.Effect;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /* Collection of all possible cards for a character. */
@@ -12,11 +18,12 @@ public class CardLibrary {
     public void CardCollection() { }
 
     public void initialize() {
-        green.addCard(new Card("Slice", 5, 0, 0, CardType.ATTACK));
-        green.addCard(new Card("Deflect", 0, 4, 0, CardType.SKILL));
+        List<Effect> noEffects = new ArrayList<>();
+        green.addCard(new AttackCard("Slice", 0, noEffects));
+        green.addCard(new SkillCard("Deflect", 0, noEffects));
 
-        colorless.addCard(new Card("Good Instincts", 0, 4, 0, CardType.SKILL));
-        colorless.addCard(new Card("Swift Strike", 5, 0, 0, CardType.ATTACK));
+        colorless.addCard(new SkillCard("Good Instincts", 0, noEffects));
+        colorless.addCard(new AttackCard("Swift Strike", 0, noEffects));
     }
 
     public static List<Card> getRandomCards(int cardCount) {

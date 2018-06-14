@@ -2,8 +2,8 @@ package com.kevinlondon.spirelike.screens;
 
 import asciiPanel.AsciiPanel;
 import com.kevinlondon.spirelike.BattleDifficulty;
-import com.kevinlondon.spirelike.cards.Card;
-import com.kevinlondon.spirelike.cards.CardLibrary;
+import com.kevinlondon.spirelike.collectibles.cards.Card;
+import com.kevinlondon.spirelike.collectibles.CardLibrary;
 import lombok.Getter;
 
 import java.awt.event.KeyEvent;

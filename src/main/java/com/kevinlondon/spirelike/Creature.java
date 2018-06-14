@@ -1,5 +1,6 @@
 package com.kevinlondon.spirelike;
 
+import com.kevinlondon.spirelike.statuses.Status;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

@@ -1,9 +1,6 @@
 package com.kevinlondon.spirelike.statuses;
 
-import com.kevinlondon.spirelike.Status;
-import lombok.Getter;
-
-public class Weak extends Status {
+public class Weak {
 
     private final int duration;
 

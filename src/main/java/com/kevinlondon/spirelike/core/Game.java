@@ -3,7 +3,7 @@ package com.kevinlondon.spirelike.core;
 import asciiPanel.AsciiPanel;
 import lombok.Data;
 import com.kevinlondon.spirelike.Player;
-import com.kevinlondon.spirelike.cards.CardLibrary;
+import com.kevinlondon.spirelike.collectibles.CardLibrary;
 import com.kevinlondon.spirelike.screens.Screen;
 import com.kevinlondon.spirelike.screens.StartScreen;
 

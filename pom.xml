@@ -23,16 +23,22 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.github.Valkryst</groupId>
-            <artifactId>VTerminal</artifactId>
-            <version>3.3.0-BETA</version>
-        </dependency>
-
-        <dependency>
             <groupId>com.github.trystan</groupId>
             <artifactId>AsciiPanel</artifactId>
             <version>7b0dbce5c882d4a4725cc001286eeddaeae06f67</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>25.1-jre</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>1.18.0</version>
+            <scope>provided</scope>
+        </dependency>
     </dependencies>
 </project>

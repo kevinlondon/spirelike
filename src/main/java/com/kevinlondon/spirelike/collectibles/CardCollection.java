@@ -1,5 +1,6 @@
-package com.kevinlondon.spirelike.cards;
+package com.kevinlondon.spirelike.collectibles;
 
+import com.kevinlondon.spirelike.collectibles.cards.Card;
 import lombok.Data;
 
 import java.util.ArrayList;

@@ -1,7 +1,6 @@
 package com.kevinlondon.spirelike;
 import asciiPanel.AsciiFont;
 import com.kevinlondon.spirelike.core.Game;
-import com.valkryst.VTerminal.Screen;
 
 
 import javax.swing.JFrame;

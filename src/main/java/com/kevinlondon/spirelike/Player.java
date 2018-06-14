@@ -1,9 +1,12 @@
 package com.kevinlondon.spirelike;
 
 
-import com.kevinlondon.spirelike.cards.Card;
-import com.kevinlondon.spirelike.cards.CardCollection;
-import com.kevinlondon.spirelike.cards.CardType;
+import com.kevinlondon.spirelike.collectibles.cards.AttackCard;
+import com.kevinlondon.spirelike.collectibles.cards.Card;
+import com.kevinlondon.spirelike.collectibles.CardCollection;
+import com.kevinlondon.spirelike.collectibles.CardType;
+import com.kevinlondon.spirelike.collectibles.cards.SkillCard;
+import com.kevinlondon.spirelike.effects.Effect;
 import lombok.Getter;
 
 import java.util.ArrayList;
@@ -33,8 +36,8 @@ public class Player extends Creature {
 
     private void createDeck() {
         deck.clear();
-        Card strike = new Card("Strike", 5, 0, 1, CardType.ATTACK);
-        Card defend = new Card("Defend", 0, 5, 1, CardType.SKILL);
+        Card strike = new AttackCard("Strike", 1, new ArrayList<Effect>());
+        Card defend = new SkillCard("Defend", 1, new ArrayList<Effect>());
         for (int i=0; i < 5; i++) {
             deck.addCard(strike);
             deck.addCard(defend);
@@ -65,15 +68,18 @@ public class Player extends Creature {
      * Play an untargetted card, such as a power or skill.
      */
     public void playCard(Card card) {
-        addBlock(card.getBlock());
-        EventLog.add(String.format("Added %d block", card.getBlock()));
+        for (Effect effect : card.getEffects()) {
+            effect.apply(this, this);
+        }
     }
 
     /*
      * Target a single monster with a card.
      */
     public void playCardOnMonster(Card card, Monster monster) {
-        monster.defend(card.getDamage());
+        for (Effect effect : card.getEffects()) {
+            effect.apply(this, monster);
+        }
     }
 
     /*

@@ -1,7 +1,7 @@
 package com.kevinlondon.spirelike;
 
-import com.kevinlondon.spirelike.cards.Card;
-import com.kevinlondon.spirelike.cards.CardCollection;
+import com.kevinlondon.spirelike.collectibles.cards.Card;
+import com.kevinlondon.spirelike.collectibles.CardCollection;
 import com.kevinlondon.spirelike.core.Game;
 import lombok.Data;
 import lombok.Getter;
@@ -102,7 +102,7 @@ public class Battle {
 
         final Card card = hand.getCardAtIndex(index);
 
-        if (card.getCost() > player.getMana()) {
+        if (card.getEnergyCost() > player.getMana()) {
             System.out.println("Can't play, too expensive.");
             return;
         }
@@ -125,7 +125,7 @@ public class Battle {
             player.playCard(card);
         }
 
-        player.spendMana(card.getCost());
+        player.spendMana(card.getEnergyCost());
         hand.removeCard(card);
         discarded.addCard(card);
     }
