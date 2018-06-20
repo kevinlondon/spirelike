@@ -1,11 +1,10 @@
 package com.kevinlondon.spirelike;
 
 
-import com.kevinlondon.spirelike.collectibles.cards.AttackCard;
+import com.kevinlondon.spirelike.collectibles.cards.Attack;
 import com.kevinlondon.spirelike.collectibles.cards.Card;
 import com.kevinlondon.spirelike.collectibles.CardCollection;
-import com.kevinlondon.spirelike.collectibles.CardType;
-import com.kevinlondon.spirelike.collectibles.cards.SkillCard;
+import com.kevinlondon.spirelike.collectibles.cards.Skill;
 import com.kevinlondon.spirelike.effects.Effect;
 import lombok.Getter;
 
@@ -14,16 +13,14 @@ import java.util.List;
 
 public class Player extends Creature {
 
+    private static final int STARTING_MANA = 3;
     @Getter
     private final CardCollection deck = new CardCollection();
-
-    private static final int STARTING_MANA = 3;
+    public int CARD_DRAW_COUNT = 5;
     private int maxMana = STARTING_MANA;
     private int gold = 99;
-
     @Getter
     private int mana;
-    public int CARD_DRAW_COUNT = 5;
 
     public Player(String name, int maxHealth) {
         super(name, maxHealth);
@@ -36,8 +33,8 @@ public class Player extends Creature {
 
     private void createDeck() {
         deck.clear();
-        Card strike = new AttackCard("Strike", 1, new ArrayList<Effect>());
-        Card defend = new SkillCard("Defend", 1, new ArrayList<Effect>());
+        Card strike = new Attack("Strike", 1, new ArrayList<Effect>());
+        Card defend = new Skill("Defend", 1, new ArrayList<Effect>());
         for (int i=0; i < 5; i++) {
             deck.addCard(strike);
             deck.addCard(defend);

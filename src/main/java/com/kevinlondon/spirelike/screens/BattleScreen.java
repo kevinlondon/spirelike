@@ -1,34 +1,30 @@
 package com.kevinlondon.spirelike.screens;
 
 import asciiPanel.AsciiPanel;
-import com.kevinlondon.spirelike.*;
-import com.kevinlondon.spirelike.renderers.Renderer;
+import com.kevinlondon.spirelike.Battle;
+import com.kevinlondon.spirelike.EventLog;
+import com.kevinlondon.spirelike.Monster;
 import com.kevinlondon.spirelike.collectibles.cards.Card;
+import com.kevinlondon.spirelike.renderers.Renderer;
 
 import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
-import static java.lang.Thread.sleep;
-
 public class BattleScreen extends Screen {
 
-    private AsciiPanel terminal;
-
-    private static int MAX_HAND_CARDS = 9;
-    private static int PLAYER_Y_OFFSET = 1;
-    private static int ENEMY_START_Y_POSITION = PLAYER_Y_OFFSET + 2;
-
-    private static int CURSOR_X_OFFSET = 1;
-    private static int TEXT_X_OFFSET = CURSOR_X_OFFSET + 3;
-    private static int CARD_START_Y_POSITION = 12;  // max height of 23 at the moment, max cards of 9.
-
-    private static int DECK_SIZE_OFFSET = CARD_START_Y_POSITION + MAX_HAND_CARDS + 1;
-    private static int HELP_OFFSET = DECK_SIZE_OFFSET + 1;
-
+    private static final int MAX_HAND_CARDS = 9;
+    private static final int PLAYER_Y_OFFSET = 1;
+    private static final int ENEMY_START_Y_POSITION = PLAYER_Y_OFFSET + 2;
+    private static final int CURSOR_X_OFFSET = 1;
+    private static final int TEXT_X_OFFSET = CURSOR_X_OFFSET + 3;
+    private static final int CARD_START_Y_POSITION = 12;  // max height of 23 at the moment, max cards of 9.
+    private static final int DECK_SIZE_OFFSET = CARD_START_Y_POSITION + MAX_HAND_CARDS + 1;
+    private static final int HELP_OFFSET = DECK_SIZE_OFFSET + 1;
+    private final AsciiPanel terminal;
+    private final Battle battle;
+    private final List<Renderer> renderers;
     private int cursorPosition = PLAYER_Y_OFFSET;  // default to selecting where the player is
-    private Battle battle;
-    private List<Renderer> renderers;
 
     public BattleScreen(final AsciiPanel terminal) {
         this.terminal = terminal;
@@ -38,7 +34,7 @@ public class BattleScreen extends Screen {
 
     @Override
     public void displayOutput() {
-        for (Renderer renderer : renderers) {
+        for (final Renderer renderer : renderers) {
             renderer.render(terminal);
         }
 
@@ -61,8 +57,8 @@ public class BattleScreen extends Screen {
     }
 
     private void renderEnemies() {
-        int y = ENEMY_START_Y_POSITION;
-        for (Monster monster : battle.getMonsters()) {
+        final int y = ENEMY_START_Y_POSITION;
+        for (final Monster monster : battle.getMonsters()) {
             terminal.write(monster.toBattleStatus(), TEXT_X_OFFSET, y);
         }
     }
@@ -70,7 +66,7 @@ public class BattleScreen extends Screen {
     private void renderHand() {
         int count = 1;
 
-        for (Card card : battle.getHand().getCards()) {
+        for (final Card card : battle.getHand().getCards()) {
             terminal.write(count + ": " + card.toBattleStatus(), TEXT_X_OFFSET, CARD_START_Y_POSITION + count);
             count += 1;
         }
@@ -90,8 +86,8 @@ public class BattleScreen extends Screen {
 
 
     @Override
-    public Screen respondToUserInput(KeyEvent key) {
-        switch (key.getKeyCode()){
+    public Screen respondToUserInput(final KeyEvent key) {
+        switch (key.getKeyCode()) {
             case KeyEvent.VK_UP:
                 cursorPosition = Math.max(cursorPosition - 1, 0);
                 break;
@@ -141,8 +137,8 @@ public class BattleScreen extends Screen {
     }
 
     private Screen getNextScreen() {
-        if (battle.isWin())  {
-            BattleWinScreen screen = new BattleWinScreen(terminal);
+        if (battle.isWin()) {
+            final BattleWinScreen screen = new BattleWinScreen(terminal);
             screen.addRewards(battle.getBattleDifficulty());
             return screen;
         } else if (battle.isLoss()) {

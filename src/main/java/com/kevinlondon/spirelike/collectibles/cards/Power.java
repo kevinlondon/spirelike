@@ -5,10 +5,10 @@ import com.kevinlondon.spirelike.effects.Effect;
 
 import java.util.List;
 
-public class SkillCard extends Card{
-    public static final CardType cardType = CardType.SKILL;
+public class Power extends Card {
+    public static final CardType cardType = CardType.POWER;
 
-    public SkillCard(String name, int energyCost, List<Effect> effects) {
+    public Power(final String name, final int energyCost, final List<Effect> effects) {
         super(name, energyCost, effects);
     }
 }
